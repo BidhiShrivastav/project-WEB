@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Orders</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {font-family: Arial; background: #f5f5f5; padding: 20px;}
+        .container {max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px;}
+        h1 {color: #333; margin-bottom: 20px;}
+        .btn {padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; display: inline-block; margin: 10px 5px;}
+        table {width: 100%; border-collapse: collapse; margin-top: 20px;}
+        th, td {padding: 12px; text-align: left; border-bottom: 1px solid #ddd;}
+        th {background: #007bff; color: white;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All Orders</h1>
+        <a href="{% url 'home' %}" class="btn">Back to Shop</a>
+        
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Date</th>
+            </tr>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.customer_name }}</td>
+                <td>{{ order.product.name }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>Rs. {{ order.total }}</td>
+                <td>{{ order.date|date:"M d, Y" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No orders yet.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
